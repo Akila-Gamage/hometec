@@ -24,9 +24,7 @@ if(isset($_POST['h_prodid'])){
     //Inside the cell store the required product quantity 
     $_SESSION['basket'][$newprodid]=$reququantity;
     echo "<p>1 item added";
-}
-else{
-    echo "<p>Basket unchanged";
+
     echo "<br>";
     echo "<br>";
     $total =0;
@@ -73,15 +71,80 @@ else{
             echo $total;
             echo "</td>";
             echo "</tr>";
-        
+            
     }
     else{
         echo "Empty Basket";
-
     }
     echo "</table>";
 }
+else{
+    echo "basket unchanged";
+    echo "<br>";
+    echo "<br>";
+    $total =0;
+    echo "<table style='width:80%'>";
+    echo "<tr>";
+    echo "<th>Product Name</th>";
+    echo "<th>Price</th>";
+    echo "<th>Quantity</th>";
+    echo "<th>Subtotal</th>";
+    echo "</tr>";
+    
 
+    if(isset($_SESSION['basket'])){
+        // echo "session is created";
+        foreach($_SESSION['basket'] as $index => $value){
+            //create a $sql varialble and populate it with a SQL statement that retrieves product details
+            $SQL = "select * from Product WHERE prodId=".$index;
+            //run SQL query for connected DB or exit and display error message 
+            $exeSQL= mysqli_query($conn, $SQL) or die (mysqli_error($conn));
+            while ($arrayp=mysqli_fetch_array($exeSQL)){
+                echo "<tr>";
+                echo "<td>";
+                echo $arrayp['prodName']; //display product name as contained in the array
+                echo "</td>";
+                echo "<td>";
+                echo $arrayp['prodPrice']; 
+                echo "</td>";
+                echo "<td>";
+                echo $value;
+                echo "</td>";
+                $subtotal = $arrayp['prodPrice']*$value;
+                echo "<td>";
+                echo $subtotal;
+                echo "</td>";
+                echo "</tr>";
+                $total = $total + $subtotal;
+            }
+        }
+        echo "<tr>";
+            echo "<td colspan='3'>";
+            echo "Total";
+            echo "</td>";
+            echo "<td>";
+            echo $total;
+            echo "</td>";
+            echo "</tr>";
+            
+    }
+    else{
+        echo "<tr>";
+        echo "<td colspan='3'>";
+        echo "Total";
+        echo "</td>";
+        echo "<td>";
+        echo $total;
+        echo "</td>";
+        echo "</tr>";
+        echo "Empty Basket";
+    }
+    echo "</table>";
+}
+echo "<br>";
+echo "<a href='clearbasket.php'>";
+echo "<p><h5>CLEAR BASKET</h5>";
+echo "</a>";
 include("footfile.html"); //include head layout
 echo "</body>";
 ?>
