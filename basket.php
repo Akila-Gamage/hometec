@@ -7,6 +7,14 @@ echo "<title>".$pagename."</title>"; //display name of the page as window title
 echo "<body>";
 include ("headfile.html"); //include header layout file
 echo "<h4>".$pagename."</h4>"; //display name of the page on the web page
+if(isset($_POST['del_prodid'])){
+    //capture the posted product id and assign it to a local variable $delprodid
+    $delprodid=$_POST['del_prodid'];
+    //unset the cell of the session for this posted product id variable
+    unset($_SESSION['basket'][$delprodid]);
+    //display a "1 item removed from the basket" message
+    echo "<p>1 item removed from the basket";
+}
 if(isset($_POST['h_prodid'])){
     //capture the ID of selected product using the POST method and the $_POST superglobal variable 
     //and store it in a new local variable called $newprodid
@@ -59,6 +67,12 @@ if(isset($_POST['h_prodid'])){
                 echo "<td>";
                 echo $subtotal;
                 echo "</td>";
+                echo "<td class='center'>";
+                echo "<form action = 'basket.php' method='post'>";
+                echo "<input type='submit' value='remove' class='btn'>";
+                echo "<input type='hidden' name='del_prodid' value=".$prodinbasketarray['prodId'].">";
+                echo "</form>";
+                echo "</td>";
                 echo "</tr>";
                 $total = $total + $subtotal;
             }
@@ -79,16 +93,16 @@ if(isset($_POST['h_prodid'])){
     echo "</table>";
 }
 else{
-    echo "basket unchanged";
     echo "<br>";
     echo "<br>";
     $total =0;
-    echo "<table style='width:80%'>";
+    echo "<table style='width:80%' id='baskettable'>";
     echo "<tr>";
     echo "<th>Product Name</th>";
     echo "<th>Price</th>";
     echo "<th>Quantity</th>";
     echo "<th>Subtotal</th>";
+    echo "<th>Remove Product</th>";
     echo "</tr>";
     
 
@@ -114,12 +128,18 @@ else{
                 echo "<td>";
                 echo $subtotal;
                 echo "</td>";
+                echo "<td class='center'>";
+                echo "<form action = basket.php method=post>";
+                echo "<input type=submit value='remove' class='btn'>";
+                echo "<input type=hidden name='del_prodid' value=".$prodinbasketarray['prodId'].">";
+                echo "</form>";
+                echo "</td>";
                 echo "</tr>";
                 $total = $total + $subtotal;
             }
         }
         echo "<tr>";
-            echo "<td colspan='3'>";
+            echo "<td colspan='4'>";
             echo "Total";
             echo "</td>";
             echo "<td>";
@@ -130,7 +150,7 @@ else{
     }
     else{
         echo "<tr>";
-        echo "<td colspan='3'>";
+        echo "<td colspan='4'>";
         echo "Total";
         echo "</td>";
         echo "<td>";
@@ -142,9 +162,23 @@ else{
     echo "</table>";
 }
 echo "<br>";
+//clear basket anchor tag
+echo "<p class='updateInfo'>";
 echo "<a href='clearbasket.php'>";
-echo "<p><h5>CLEAR BASKET</h5>";
-echo "</a>";
+echo "<h5>CLEAR BASKET</h5>";
+echo "</a></p>";
+echo "<br>";
+//Signup link
+echo "<p class='updateInfo'>New hometeq customers: ";
+echo "<a href='signup.php'>";
+echo "Sign Up";
+echo "</a></p>";
+echo "<br>";
+//login link
+echo "<p class='updateInfo'>Returning hometeq customers: ";
+echo "<a href='login.php'>";
+echo "Log In";
+echo "</a></p>";
 include("footfile.html"); //include head layout
 echo "</body>";
 ?>
