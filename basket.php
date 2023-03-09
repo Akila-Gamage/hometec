@@ -36,12 +36,13 @@ if(isset($_POST['h_prodid'])){
     echo "<br>";
     echo "<br>";
     $total =0;
-    echo "<table style='width:80%'>";
+    echo "<table style='width:80%' id='baskettable'>";
     echo "<tr>";
     echo "<th>Product Name</th>";
     echo "<th>Price</th>";
     echo "<th>Quantity</th>";
     echo "<th>Subtotal</th>";
+    echo "<th>Remove Product</th>";
     echo "</tr>";
     
 
@@ -67,18 +68,18 @@ if(isset($_POST['h_prodid'])){
                 echo "<td>";
                 echo $subtotal;
                 echo "</td>";
-                echo "<td class='center'>";
-                echo "<form action = 'basket.php' method='post'>";
-                echo "<input type='submit' value='remove' class='btn'>";
-                echo "<input type='hidden' name='del_prodid' value=".$prodinbasketarray['prodId'].">";
-                echo "</form>";
+                echo "<form action=basket.php method=post>";
+                echo "<td>";
+                echo "<input type=submit value='remove' class='btn'>";
                 echo "</td>";
+                echo "<input type=hidden name='del_prodid' value=".$prodinbasketarray['prodId'].">";
+                echo "</form>";
                 echo "</tr>";
                 $total = $total + $subtotal;
             }
         }
         echo "<tr>";
-            echo "<td colspan='3'>";
+            echo "<td colspan='4'>";
             echo "Total";
             echo "</td>";
             echo "<td>";
@@ -128,12 +129,12 @@ else{
                 echo "<td>";
                 echo $subtotal;
                 echo "</td>";
-                echo "<td class='center'>";
-                echo "<form action = basket.php method=post>";
+                echo "<form action=basket.php method=post>";
+                echo "<td>";
                 echo "<input type=submit value='remove' class='btn'>";
+                echo "</td>";
                 echo "<input type=hidden name='del_prodid' value=".$prodinbasketarray['prodId'].">";
                 echo "</form>";
-                echo "</td>";
                 echo "</tr>";
                 $total = $total + $subtotal;
             }
