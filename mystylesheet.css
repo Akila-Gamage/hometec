@@ -279,8 +279,7 @@ button:hover, #submitbtn:hover, .btn:hover{
 .element{
 	width:30%;
 	display:flex;
-	justify-content:space-between;
-	
+	justify-content:space-between;	
 }
 
 #userdetails{	

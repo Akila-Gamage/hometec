@@ -177,7 +177,7 @@ echo "</a></p>";
 echo "<br>";
 //login link
 echo "<p class='updateInfo'>Returning hometeq customers: ";
-echo "<a href='login.php'>";
+echo "<a href='login.php' >";
 echo "Log In";
 echo "</a></p>";
 include("footfile.html"); //include head layout
