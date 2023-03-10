@@ -48,8 +48,8 @@ echo "<input type=password name=cpassword size=18 >";
 echo "</div>";
 
 echo "<div class='element'>";
-echo "<input type=submit value='sign up' class='btn'>";
-echo "<input type=submit value='clear form' class='btn'>";
+echo "<input type=submit value='Sign Up' class='btn'>";
+echo "<input type=submit value='Clear Form' class='btn'>";
 echo "</div>";
 
 echo "</form>";
