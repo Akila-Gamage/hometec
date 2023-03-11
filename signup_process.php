@@ -20,10 +20,52 @@ $email=trim($_POST['email']);
 $password=trim($_POST['password']);
 $cpassword=trim($_POST['cpassword']);
 
-//Write a SQL query to insert a new user into users table
-$SQL = "INSERT INTO Users (userType, userFName, userLName, userAddres, userPostCode, userTelNo, userEmail, userPassword) VALUES ('C','".$fname."','".$lname."','".$address."','".$postcode."','".$telno."','".$email."','".$password."')";
-//Execute the INSERT INTO SQL query
-mysqli_query($conn, $SQL);
+//if the mandatory fields in the form (all fields) are not empty
+if(!empty($fname) or !empty($lname) or !empty($address) or !empty($postcode) or !empty($telno) or !empty($email) or !empty($password) or !empty($cpassword))
+{
+    //if the 2 entered passwords do not match
+    if($password<>$cpassword)
+    {
+        //Display sign-up failed message
+        echo "<p><b>Your Sign-up failed!</b></p>";
+        //Display error passwords not matching message
+        echo "<p>The two passwords are not matching.</p>";
+        //Display a link back to register page
+        echo "<p>Go back to: <a href='signup.php'>sign up</a></p>";
+    }
+    //else
+    else
+    {
+        $reg = "/^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,3})$/";
+        //if email matches the regular expression
+        if(preg_match($reg,$email))
+        {
+            //Write a SQL query to insert a new user into users table
+            $SQL = "INSERT INTO Users (userType, userFName, userLName, userAddres, userPostCode, userTelNo, userEmail, userPassword) VALUES ('C','".$fname."','".$lname."','".$address."','".$postcode."','".$telno."','".$email."','".$password."')";
+            //Execute the INSERT INTO SQL query
+            mysqli_query($conn, $SQL);
+            // Execute INSERT INTO SQL query, if SQL execution is correct
+            if(mysqli_query($conn, $SQL))
+            {
+                //Display signup confirmation message
+                echo "<p><b>Sign-Up Complete</b></p>";
+                //Display a link to login page
+                echo "<p>Go to Login Page: <a href='login.php'>Login up</a></p>";
+            }
+            //else, if the SQL execution is erroneous, there is a problem
+            else
+            {
+                //Display sign-up failed message
+                echo "<p><b>Your Sign-up failed!</b></p>";
+
+                //Return the SQL execution error number using the error detector
+                echo "<br><p>SQL ERR No: ".mysqli_errono($conn)."</p>";
+                
+            }
+        }
+    }
+}
+
 include("footfile.html"); //include head layout
 echo "</body>";
 ?>
