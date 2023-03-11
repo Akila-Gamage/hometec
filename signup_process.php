@@ -83,7 +83,7 @@ if(!empty($fname) or !empty($lname) or !empty($address) or !empty($postcode) or 
             //Display sign-up failed message
             echo "<p><b>Your Sign-up failed!</b></p>";
             //Display "email not in the right format" message
-            echo "<p>Please insert your e-mail address correctly.</p>"
+            echo "<p>Please insert your e-mail address correctly.</p>";
             //Display a link to login page
             echo "<p>Go back to: <a href='signup.php'>sign up</a></p>";
         }
@@ -94,7 +94,7 @@ else
     //Display sign-up failed message
     echo "<p><b>Your Sign-up failed!</b></p>";
     //Display "manadotary fields need to filled in" message
-    echo "<p>All mandotary fields need to be filled in.</p>"
+    echo "<p>All mandotary fields need to be filled in.</p>";
     //Display a link to login page
     echo "<p>Go back to: <a href='signup.php'>sign up</a></p>";
 

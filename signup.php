@@ -6,7 +6,7 @@ echo "<body>";
 include ("headfile.html"); //include header layout file
 echo "<h4>".$pagename."</h4>"; //display name of the page on the web page
 echo "<div  class='formStyle'>";
-echo "<form action=signup_process.php method=post id='signupform'>";
+echo "<form action='signup_process.php' method=post id='signupform'>";
 echo "<div class='element'>";
 echo "<label for=fname>First Name: </label>";
 echo "<input type=text name=fname size=18 >";
