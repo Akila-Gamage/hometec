@@ -60,10 +60,44 @@ if(!empty($fname) or !empty($lname) or !empty($address) or !empty($postcode) or 
 
                 //Return the SQL execution error number using the error detector
                 echo "<br><p>SQL ERR No: ".mysqli_errono($conn)."</p>";
-                
+                echo "<p>SQL Error Msg: ".mysqli_error($conn)."</p>";
+                //if error detector returns number 1062 i.e. unique constraint on the email is breached
+                if(mysqli_errono($conn)==1062)
+                {
+                    //Display email already exist error message
+                    echo "<p>An account with your e-mail address is already registered.</p>";
+                    //Display a link to login page
+                    echo "<p>Go back to: <a href='signup.php'>sign up</a></p>";
+                }
+                elseif(mysqli_errono($conn)==1064)
+                {
+                    //Display email already exist error message
+                    echo "<p>Invalid characters used</p>";
+                    //Display a link to login page
+                    echo "<p>Go back to: <a href='signup.php'>sign up</a></p>";
+                }
             }
         }
+        else
+        {
+            //Display sign-up failed message
+            echo "<p><b>Your Sign-up failed!</b></p>";
+            //Display "email not in the right format" message
+            echo "<p>Please insert your e-mail address correctly.</p>"
+            //Display a link to login page
+            echo "<p>Go back to: <a href='signup.php'>sign up</a></p>";
+        }
     }
+}
+else
+{
+    //Display sign-up failed message
+    echo "<p><b>Your Sign-up failed!</b></p>";
+    //Display "manadotary fields need to filled in" message
+    echo "<p>All mandotary fields need to be filled in.</p>"
+    //Display a link to login page
+    echo "<p>Go back to: <a href='signup.php'>sign up</a></p>";
+
 }
 
 include("footfile.html"); //include head layout
