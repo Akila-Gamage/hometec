@@ -66,16 +66,14 @@ if(!empty($fname) or !empty($lname) or !empty($address) or !empty($postcode) or 
                 {
                     //Display email already exist error message
                     echo "<p>An account with your e-mail address is already registered.</p>";
-                    //Display a link to login page
-                    echo "<p>Go back to: <a href='signup.php'>sign up</a></p>";
                 }
                 elseif(mysqli_errono($conn)==1064)
                 {
                     //Display email already exist error message
                     echo "<p>Invalid characters used</p>";
-                    //Display a link to login page
-                    echo "<p>Go back to: <a href='signup.php'>sign up</a></p>";
                 }
+                //Display a link to login page
+                echo "<p>Go back to: <a href='signup.php'>sign up</a></p>";
             }
         }
         else
