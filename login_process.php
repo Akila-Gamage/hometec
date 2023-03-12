@@ -15,8 +15,9 @@ $password=$_POST['password'];
 //Display the content of these 2 variables to ensure that the values have been posted properly
 echo "<p>Email entered:".$email."</p>";
 echo "<p>Password entered:".$password."</p>";
+echo "<br>";
 
-if(empty($name) or empty($password))
+if(empty($email) or empty($password))
 {
     //Display login failed message
     echo "<p><b>Login failed!</b></p>";
@@ -41,6 +42,7 @@ else
     if($nbrecs==0)
     {
         echo "<p><b>Login failed!</b></p>";
+        //display error message "Email not recognised, login again"
         echo "<p>Email not recognized</p>";
         echo "<br>";
         //Display a link to login page
@@ -48,7 +50,30 @@ else
     }
     else
     {
-        if()
+        if(!($password==$arrayu['userPassword']))
+        {
+            echo "<p><b>Login failed!</b></p>";
+            //display error message "Password not recognised, login again"
+            echo "<p>Password not valid</p>";
+            echo "<br>";
+            //Display a link to login page
+            echo "<p>Go back to: <a href='login.php'>login</a></p>";
+        }
+        else
+        {
+            //display login success message
+            echo "<p><b>Login Success!</b></p>";
+            $id = $_SESSION['userId'];
+            $type = $_SESSION['userType'];
+            $fname = $_SESSION['userFName'];
+            $lname = $_SESSION['userLName'];
+
+            echo "<p>Welcome,".$fname." ".$lanme."</p>";
+            echo "<p>User Type:".$type."</p>";
+
+            echo "<p>Continue shopping for: <a href='index.php'>Home Tech</a></p>";
+            echo "<p>View your <a href='basket.php'>Smart Basket</a></p>";
+        }
     }
 }
 include("footfile.html"); //include head layout
