@@ -11,14 +11,14 @@ echo "<h4>".$pagename."</h4>"; //display name of the page on the web page
 
 //Capture the 7 inputs entered in the 7 fields of the form using the $_POST superglobal variable 
 //Store these details into a set of 7 new local variables
-$fname=trim($_POST['fname']);
-$lname=trim($_POST['lname']);
-$address=trim($_POST['address']);
-$postcode=trim($_POST['postcode']);
-$telno=trim($_POST['telno']);
-$email=trim($_POST['email']);
-$password=trim($_POST['password']);
-$cpassword=trim($_POST['cpassword']);
+$fname=$_POST['fname'];
+$lname=$_POST['lname'];
+$address=$_POST['address'];
+$postcode=$_POST['postcode'];
+$telno=$_POST['telno'];
+$email=$_POST['email'];
+$password=$_POST['password'];
+$cpassword=$_POST['cpassword'];
 
 //if the mandatory fields in the form (all fields) are not empty
 if(!empty($fname) or !empty($lname) or !empty($address) or !empty($postcode) or !empty($telno) or !empty($email) or !empty($password) or !empty($cpassword))
@@ -41,9 +41,9 @@ if(!empty($fname) or !empty($lname) or !empty($address) or !empty($postcode) or 
         if(preg_match($reg,$email))
         {
             //Write a SQL query to insert a new user into users table
-            $SQL = "INSERT INTO Users (userType, userFName, userLName, userAddres, userPostCode, userTelNo, userEmail, userPassword) VALUES ('C','".$fname."','".$lname."','".$address."','".$postcode."','".$telno."','".$email."','".$password."')";
+            $SQL = "Insert into Users (userType, userFName, userLName, userAddres, userPostCode, userTelNo, userEmail, userPassword) values ('C','".$fname."','".$lname."','".$address."','".$postcode."','".$telno."','".$email."','".$password."')";
             //Execute the INSERT INTO SQL query
-            mysqli_query($conn, $SQL);
+            mysqli_query($conn, $SQL) or die (mysqli_query($conn));;
             // Execute INSERT INTO SQL query, if SQL execution is correct
             if(mysqli_query($conn, $SQL))
             {
