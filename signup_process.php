@@ -67,7 +67,7 @@ if(!empty($fname) or !empty($lname) or !empty($address) or !empty($postcode) or 
                     //Display email already exist error message
                     echo "<p>An account with your e-mail address is already registered.</p>";
                 }
-                elseif(mysqli_errono($conn)==1064)
+                if(mysqli_errono($conn)==1064)
                 {
                     //Display email already exist error message
                     echo "<p>Invalid characters used</p>";
